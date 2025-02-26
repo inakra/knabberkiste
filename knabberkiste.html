@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Versandhandel">
+  <title>Knabberkiste - Ihr Online-Shop für Katz und Hund</title>
+<style>
+    body {
+        background-color: rgb(185, 166, 244);
+        font-family: Verdana;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h1><strong>Willkommen bei Knabberkiste, Ihr Online-Shop für Hund und Katz!</strong></h1>
+  <h2>Produktsuche</h2>
+<!-- Suchfeld -->
+  <input type="text" id="suche" placeholder="Produktname eingeben">
+<!-- Kategorien mit Dropdown -->
+  <select id="kategorie">
+      <option value="">Alle Kategorien</option>
+      <option value="Hundefutter">Hundefutter</option>
+      <option value="Katzenfutter">Katzenfutter</option>
+  </select>
+<!-- Preissortierung -->
+  <select id="sortierung">
+      <option value="asc">Preis aufsteigend</option>
+      <option value="desc">Preis absteigend</option>
+  </select>
+<button onclick="sucheProdukt()">Suchen</button>
+<div id="ergebnis"></div>
+<script>
+    function sucheProdukt() {
+        let suchbegriff = document.getElementById('suche').value;
+        let kategorie = document.getElementById('kategorie').value;
+        let sortierung = document.getElementById('sortierung').value;
+
+        fetch(`knabberkistephp.php?suche=${suchbegriff}&kategorie=${kategorie}&sortierung=${sortierung}`)
+        .then(response => response.text())
+        .then(data => document.getElementById('ergebnis').innerHTML = data);
+}
+
+  </script>
+
+  <footer>
+    <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">AGB</a> | <a href="#">Kontakt</a></p>
+</footer>
+</body>
+</html>
